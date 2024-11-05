@@ -1,0 +1,649 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C15A3519-CA18-44C2-8B2A-FDDD898DC845}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>EclosionHub</RootNamespace>
+    <AssemblyName>EclosionHub</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.Core, Version=1.11.5.1, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9" />
+    <Reference Include="Bunifu.UI.WinForms.BunifuButton">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuCheckBox">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuCheckBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuDataGridView">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuDropdown">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuDropdown.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuFormDock">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuFormDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuLabel">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuLabel.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuPages">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuProgressBar">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuScrollBar">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuScrollBar.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuTextbox">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuToolTip">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuToolTip.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuUserControl">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu.UI.WinForms.BunifuUserControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>E:\FramWorks\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_WinForms_1.11.5.1\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Guna.UI">
+      <HintPath>E:\FramWorks\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI WinForms\.net 4.0\Guna.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2">
+      <HintPath>E:\FramWorks\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BDD\Connecteur.cs" />
+    <Compile Include="Classes\codeQR.cs" />
+    <Compile Include="Classes\Controle.cs" />
+    <Compile Include="Classes\Entreprise.cs" />
+    <Compile Include="Classes\Incubes.cs" />
+    <Compile Include="Classes\Module.cs" />
+    <Compile Include="Classes\Presence.cs" />
+    <Compile Include="Classes\RequetteRapport.cs" />
+    <Compile Include="Classes\Utilisateur.cs" />
+    <Compile Include="CodeQR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\DashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\DashBoard.Designer.cs">
+      <DependentUpon>DashBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\NewDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\NewDashboard.Designer.cs">
+      <DependentUpon>NewDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UserControlModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UserControlModule.Designer.cs">
+      <DependentUpon>UserControlModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UserControlPresencecs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UserControlPresencecs.Designer.cs">
+      <DependentUpon>UserControlPresencecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UserControlProjet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UserControlProjet.Designer.cs">
+      <DependentUpon>UserControlProjet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EclosionHubDataSetFinal1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EclosionHubDataSetFinal1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Eligibilite.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entreprisee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entreprise\EntrepriseMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entreprise\EntrepriseMain.Designer.cs">
+      <DependentUpon>EntrepriseMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entreprise\ModifierEntreprise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entreprise\ModifierEntreprise.Designer.cs">
+      <DependentUpon>ModifierEntreprise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Incube.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="incubes\Carte Incube.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="incubes\Carte Incube.Designer.cs">
+      <DependentUpon>Carte Incube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\IncubesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dashboard\IncubesUserControl.Designer.cs">
+      <DependentUpon>IncubesUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="incubes\IncubeMoreDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="incubes\IncubeMoreDetails.Designer.cs">
+      <DependentUpon>IncubeMoreDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="incubes\mainIncube.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="incubes\mainIncube.Designer.cs">
+      <DependentUpon>mainIncube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="incubes\Menu Carte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="incubes\Menu Carte.Designer.cs">
+      <DependentUpon>Menu Carte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Live\LiveMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Live\LiveMain.Designer.cs">
+      <DependentUpon>LiveMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Controle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Controle.Designer.cs">
+      <DependentUpon>Controle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Login Form.Designer.cs">
+      <DependentUpon>Login Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\JustifierAbsence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\JustifierAbsence.Designer.cs">
+      <DependentUpon>JustifierAbsence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\List des modules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\List des modules.Designer.cs">
+      <DependentUpon>List des modules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ModifierModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ModifierModule.Designer.cs">
+      <DependentUpon>ModifierModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ModuleMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ModuleMain.Designer.cs">
+      <DependentUpon>ModuleMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Syncronisation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Syncronisation.Designer.cs">
+      <DependentUpon>Syncronisation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RapportDePresenceComplet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RapportParticipationTotalParModule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RapportPresenceParModule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RapportPresenceParSessionParModule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\GetPresenceByIncubes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rapports\GetPresenceByIncubes.Designer.cs">
+      <DependentUpon>GetPresenceByIncubes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\RapportModuleAndIncube.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rapports\RapportModuleAndIncube.Designer.cs">
+      <DependentUpon>RapportModuleAndIncube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\RapportParticipationParModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\RapportParticipationParModule.Designer.cs">
+      <DependentUpon>RapportParticipationParModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlButtonDeRapport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlButtonDeRapport.Designer.cs">
+      <DependentUpon>UserControlButtonDeRapport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlObservationEligibiliteBourse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlObservationEligibiliteBourse.Designer.cs">
+      <DependentUpon>UserControlObservationEligibiliteBourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlObservationsIncubes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlObservationsIncubes.Designer.cs">
+      <DependentUpon>UserControlObservationsIncubes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportParSessionModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportParSessionModule.Designer.cs">
+      <DependentUpon>UserControlRapportParSessionModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportPresence.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportPresence.Designer.cs">
+      <DependentUpon>UserControlRapportPresence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportTableLayout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rapports\UserControlRapportTableLayout.Designer.cs">
+      <DependentUpon>UserControlRapportTableLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapport_Print\Card.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Card.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rapport_Print\Card_B.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rapport_Print\Card_B.Designer.cs">
+      <DependentUpon>Card_B.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapport_Print\Card_Back.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Card_Back.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Rapport_Print\Carte_Incube.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rapport_Print\Carte_Incube.Designer.cs">
+      <DependentUpon>Carte_Incube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapport_Print\RapportGeneralI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rapport_Print\RapportGeneralI.Designer.cs">
+      <DependentUpon>RapportGeneralI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rapport_Print\RapportGeneralIncube1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RapportGeneralIncube.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilisateur\GererUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilisateur\GererUtilisateur.Designer.cs">
+      <DependentUpon>GererUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VueListProjetConc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VueModuleConc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VueObservationsIncube.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VuePresence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dashboard\DashBoard.resx">
+      <DependentUpon>DashBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\NewDashboard.resx">
+      <DependentUpon>NewDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UserControlModule.resx">
+      <DependentUpon>UserControlModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UserControlPresencecs.resx">
+      <DependentUpon>UserControlPresencecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\UserControlProjet.resx">
+      <DependentUpon>UserControlProjet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entreprise\EntrepriseMain.resx">
+      <DependentUpon>EntrepriseMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entreprise\ModifierEntreprise.resx">
+      <DependentUpon>ModifierEntreprise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incubes\Carte Incube.resx">
+      <DependentUpon>Carte Incube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\IncubesUserControl.resx">
+      <DependentUpon>IncubesUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incubes\IncubeMoreDetails.resx">
+      <DependentUpon>IncubeMoreDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incubes\mainIncube.resx">
+      <DependentUpon>mainIncube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="incubes\Menu Carte.resx">
+      <DependentUpon>Menu Carte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Live\LiveMain.resx">
+      <DependentUpon>LiveMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Controle.resx">
+      <DependentUpon>Controle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Login Form.resx">
+      <DependentUpon>Login Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\JustifierAbsence.resx">
+      <DependentUpon>JustifierAbsence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\List des modules.resx">
+      <DependentUpon>List des modules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ModifierModule.resx">
+      <DependentUpon>ModifierModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ModuleMain.resx">
+      <DependentUpon>ModuleMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Syncronisation.resx">
+      <DependentUpon>Syncronisation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Rapports\GetPresenceByIncubes.resx">
+      <DependentUpon>GetPresenceByIncubes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\RapportModuleAndIncube.resx">
+      <DependentUpon>RapportModuleAndIncube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\RapportParticipationParModule.resx">
+      <DependentUpon>RapportParticipationParModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlButtonDeRapport.resx">
+      <DependentUpon>UserControlButtonDeRapport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlObservationEligibiliteBourse.resx">
+      <DependentUpon>UserControlObservationEligibiliteBourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlObservationsIncubes.resx">
+      <DependentUpon>UserControlObservationsIncubes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlRapportParSessionModule.resx">
+      <DependentUpon>UserControlRapportParSessionModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlRapportPresence.resx">
+      <DependentUpon>UserControlRapportPresence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapports\UserControlRapportTableLayout.resx">
+      <DependentUpon>UserControlRapportTableLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\Card.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Card.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\Card_B.resx">
+      <DependentUpon>Card_B.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\Card_Back.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Card_Back.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\Carte_Incube.resx">
+      <DependentUpon>Carte_Incube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\RapportGeneralI.resx">
+      <DependentUpon>RapportGeneralI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rapport_Print\RapportGeneralIncube.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RapportGeneralIncube1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilisateur\GererUtilisateur.resx">
+      <DependentUpon>GererUtilisateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EclosionHubDataSetFinal1.xsc">
+      <DependentUpon>EclosionHubDataSetFinal1.xsd</DependentUpon>
+    </None>
+    <None Include="EclosionHubDataSetFinal1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EclosionHubDataSetFinal1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EclosionHubDataSetFinal1.xss">
+      <DependentUpon>EclosionHubDataSetFinal1.xsd</DependentUpon>
+    </None>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-256319_1920.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\artificial-intelligence-3382507_1280.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\galaxy-2377456_1280.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_eclosionhub.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_eclosionhub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Picsart_23-04-30_19-03-59-774.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microsoft_excel_480px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\lock_64px.png" />
+    <None Include="Resources\Asset2.jpg" />
+    <None Include="Resources\artificial-intelligence-3382507_1280 %281%29.jpg" />
+    <None Include="Resources\back_extensors_50px.png" />
+    <None Include="Resources\school_director_24px.png" />
+    <None Include="Resources\card_payment_40px.png" />
+    <None Include="Resources\delete_64px1.png" />
+    <None Include="Resources\attendance_50px.png" />
+    <None Include="Resources\print_100px.png" />
+    <None Include="Resources\delete_64px.png" />
+    <None Include="Resources\download_26px.png" />
+    <None Include="Resources\qr_code_64px2.png" />
+    <None Include="Resources\qr_code_64px1.png" />
+    <None Include="Resources\qr_code_64px.png" />
+    <None Include="Resources\bulleted_list_64px.png" />
+    <None Include="Resources\restart_48px1.png" />
+    <None Include="Resources\learn_information_48px.png" />
+    <None Include="Resources\checklist_48px.png" />
+    <None Include="Resources\upload_to_ftp_30px.png" />
+    <None Include="Resources\add_user_group_woman_man_40px.png" />
+    <None Include="Resources\search_64px.png" />
+    <None Include="Resources\restart_48px.png" />
+    <None Include="Resources\printer_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

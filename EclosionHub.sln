@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33927.289
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EclosionHub", "EclosionHub\EclosionHub.csproj", "{C15A3519-CA18-44C2-8B2A-FDDD898DC845}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EclosionHubSetup", "EclosionHubSetup\EclosionHubSetup.vdproj", "{1A5EF716-FB20-4389-A3FB-019B24D83CDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C15A3519-CA18-44C2-8B2A-FDDD898DC845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C15A3519-CA18-44C2-8B2A-FDDD898DC845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C15A3519-CA18-44C2-8B2A-FDDD898DC845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C15A3519-CA18-44C2-8B2A-FDDD898DC845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5EF716-FB20-4389-A3FB-019B24D83CDD}.Debug|Any CPU.ActiveCfg = Debug
+		{1A5EF716-FB20-4389-A3FB-019B24D83CDD}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BEF71DB-9916-4474-A10F-2AD3F9C8DEF0}
+	EndGlobalSection
+EndGlobal

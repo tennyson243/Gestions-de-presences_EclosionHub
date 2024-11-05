@@ -1,0 +1,895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EclosionHubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CodeQR">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Incube" Type="int" Nullable="false" />
+          <Property Name="code" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entreprise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Proprietaire" Type="int" Nullable="false" />
+          <Property Name="Secteur " Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Incubes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postnom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Matricule" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_debut" Type="date" Nullable="false" />
+          <Property Name="Date_fin" Type="date" Nullable="false" />
+          <Property Name="Heure_debut" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Heure_fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Formateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Statut" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Incube" Type="int" Nullable="false" />
+          <Property Name="Module" Type="int" Nullable="false" />
+          <Property Name="Present" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="heure_arrive" Type="time" Precision="7" Nullable="false" />
+          <Property Name="heure_sortie" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Date_Scan" Type="datetime" Nullable="false" />
+          <Property Name="Justification" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.Eligibilite' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="Eligibilite">
+          <Key>
+            <PropertyRef Name="Nom_Incube" />
+            <PropertyRef Name="Projet" />
+            <PropertyRef Name="P_Participation_Total" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Incube" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Projet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tot_Participation" Type="int" />
+          <Property Name="Nombre_Present" Type="int" />
+          <Property Name="Nombre_Absence" Type="int" />
+          <Property Name="P_Participation_Total" Type="varchar" MaxLength="43" Nullable="false" />
+          <Property Name="Observation" Type="varchar" MaxLength="24" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.RapportDePresenceComplet' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="RapportDePresenceComplet">
+          <Key>
+            <PropertyRef Name="Incube" />
+            <PropertyRef Name="Entreprise" />
+            <PropertyRef Name="Module" />
+          </Key>
+          <Property Name="Incube" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Entreprise" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tot_Sessions" Type="int" />
+          <Property Name="Presences" Type="int" />
+          <Property Name="Absences" Type="int" />
+          <Property Name="Pourcentage" Type="numeric" Precision="26" Scale="12" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.RapportParticipationTotalParModule' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="RapportParticipationTotalParModule">
+          <Key>
+            <PropertyRef Name="Nom_Module" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="N_Sessions" Type="int" />
+          <Property Name="Tot_Participation" Type="int" />
+          <Property Name="Nombre_Present" Type="int" />
+          <Property Name="Nombre_Absence" Type="int" />
+          <Property Name="P_Participation" Type="varchar" MaxLength="43" Nullable="false" />
+          <Property Name="Observation" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.RapportPresenceParModule' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="RapportPresenceParModule">
+          <Key>
+            <PropertyRef Name="Nom_Incube" />
+            <PropertyRef Name="Entreprise" />
+            <PropertyRef Name="Nom_Module" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Incube" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Entreprise" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nom_Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="N_Sessions" Type="int" />
+          <Property Name="Presences" Type="int" />
+          <Property Name="Absences" Type="int" />
+          <Property Name="P_Participation" Type="varchar" MaxLength="43" Nullable="false" />
+          <Property Name="Observation" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.RapportPresenceParSessionParModule' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="RapportPresenceParSessionParModule">
+          <Key>
+            <PropertyRef Name="Nom_Module" />
+          </Key>
+          <Property Name="Nom_Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="J_Session" Type="nvarchar(max)" />
+          <Property Name="Date_Seance" Type="varchar" MaxLength="30" />
+          <Property Name="Nombre_Present" Type="int" />
+          <Property Name="Nombre_Absence" Type="int" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.VueListProjetConc' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VueListProjetConc">
+          <Key>
+            <PropertyRef Name="Projet" />
+            <PropertyRef Name="Incubes" />
+            <PropertyRef Name="Secteur" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Projet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Incubes" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="Secteur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.VueModuleConc' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VueModuleConc">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Module" />
+            <PropertyRef Name="Formateur" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Debut" Type="varchar" MaxLength="30" />
+          <Property Name="Fin" Type="varchar" MaxLength="30" />
+          <Property Name="Tot_Sessions" Type="int" />
+          <Property Name="H_Debut" Type="varchar" MaxLength="30" />
+          <Property Name="H_Fin" Type="varchar" MaxLength="30" />
+          <Property Name="Formateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Statut" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.VueObservationsIncubes' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VueObservationsIncubes">
+          <Key>
+            <PropertyRef Name="N_Incube" />
+            <PropertyRef Name="N_Module" />
+            <PropertyRef Name="H_Formation" />
+            <PropertyRef Name="H_Participation" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="N_Incube" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="N_Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="D_Scan" Type="varchar" MaxLength="30" />
+          <Property Name="J_Session" Type="nvarchar(max)" />
+          <Property Name="H_D_Module" Type="varchar" MaxLength="30" />
+          <Property Name="H_Arrivee" Type="varchar" MaxLength="30" />
+          <Property Name="H_F_Module" Type="varchar" MaxLength="30" />
+          <Property Name="H_Sortie" Type="varchar" MaxLength="30" />
+          <Property Name="H_Formation" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="H_Participation" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="P_Participation" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Observation" Type="varchar" MaxLength="17" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'EclosionHub.dbo.VuePresence' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="VuePresence">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Incubes" />
+            <PropertyRef Name="projet" />
+            <PropertyRef Name="Module" />
+            <PropertyRef Name="Participation" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Incubes" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="projet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Module" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Participation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Arrive" Type="varchar" MaxLength="30" />
+          <Property Name="Sortie" Type="varchar" MaxLength="30" />
+          <Property Name="Date" Type="varchar" MaxLength="30" />
+          <Property Name="Justification" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CodeQR_Incube">
+          <End Role="Incubes" Type="Self.Incubes" Multiplicity="1" />
+          <End Role="CodeQR" Type="Self.CodeQR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeQR">
+              <PropertyRef Name="Incube" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entreprise_Proprietaire">
+          <End Role="Incubes" Type="Self.Incubes" Multiplicity="1" />
+          <End Role="Entreprise" Type="Self.Entreprise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entreprise">
+              <PropertyRef Name="Proprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presence_Incube">
+          <End Role="Incubes" Type="Self.Incubes" Multiplicity="1" />
+          <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Presence">
+              <PropertyRef Name="Incube" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presence_Module">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Presence">
+              <PropertyRef Name="Module" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EclosionHubModelStoreContainer">
+          <EntitySet Name="CodeQR" EntityType="Self.CodeQR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entreprise" EntityType="Self.Entreprise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incubes" EntityType="Self.Incubes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presence" EntityType="Self.Presence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Eligibilite" EntityType="Self.Eligibilite" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Eligibilite].[Nom_Incube] AS [Nom_Incube], 
+    [Eligibilite].[Projet] AS [Projet], 
+    [Eligibilite].[Tot_Participation] AS [Tot_Participation], 
+    [Eligibilite].[Nombre_Present] AS [Nombre_Present], 
+    [Eligibilite].[Nombre_Absence] AS [Nombre_Absence], 
+    [Eligibilite].[P_Participation_Total] AS [P_Participation_Total], 
+    [Eligibilite].[Observation] AS [Observation]
+    FROM [dbo].[Eligibilite] AS [Eligibilite]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RapportDePresenceComplet" EntityType="Self.RapportDePresenceComplet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RapportDePresenceComplet].[Incube] AS [Incube], 
+    [RapportDePresenceComplet].[Entreprise] AS [Entreprise], 
+    [RapportDePresenceComplet].[Module] AS [Module], 
+    [RapportDePresenceComplet].[Tot_Sessions] AS [Tot_Sessions], 
+    [RapportDePresenceComplet].[Presences] AS [Presences], 
+    [RapportDePresenceComplet].[Absences] AS [Absences], 
+    [RapportDePresenceComplet].[Pourcentage] AS [Pourcentage]
+    FROM [dbo].[RapportDePresenceComplet] AS [RapportDePresenceComplet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RapportParticipationTotalParModule" EntityType="Self.RapportParticipationTotalParModule" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RapportParticipationTotalParModule].[Nom_Module] AS [Nom_Module], 
+    [RapportParticipationTotalParModule].[N_Sessions] AS [N_Sessions], 
+    [RapportParticipationTotalParModule].[Tot_Participation] AS [Tot_Participation], 
+    [RapportParticipationTotalParModule].[Nombre_Present] AS [Nombre_Present], 
+    [RapportParticipationTotalParModule].[Nombre_Absence] AS [Nombre_Absence], 
+    [RapportParticipationTotalParModule].[P_Participation] AS [P_Participation], 
+    [RapportParticipationTotalParModule].[Observation] AS [Observation]
+    FROM [dbo].[RapportParticipationTotalParModule] AS [RapportParticipationTotalParModule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RapportPresenceParModule" EntityType="Self.RapportPresenceParModule" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RapportPresenceParModule].[Nom_Incube] AS [Nom_Incube], 
+    [RapportPresenceParModule].[Entreprise] AS [Entreprise], 
+    [RapportPresenceParModule].[Nom_Module] AS [Nom_Module], 
+    [RapportPresenceParModule].[N_Sessions] AS [N_Sessions], 
+    [RapportPresenceParModule].[Presences] AS [Presences], 
+    [RapportPresenceParModule].[Absences] AS [Absences], 
+    [RapportPresenceParModule].[P_Participation] AS [P_Participation], 
+    [RapportPresenceParModule].[Observation] AS [Observation]
+    FROM [dbo].[RapportPresenceParModule] AS [RapportPresenceParModule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RapportPresenceParSessionParModule" EntityType="Self.RapportPresenceParSessionParModule" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RapportPresenceParSessionParModule].[Nom_Module] AS [Nom_Module], 
+    [RapportPresenceParSessionParModule].[J_Session] AS [J_Session], 
+    [RapportPresenceParSessionParModule].[Date_Seance] AS [Date_Seance], 
+    [RapportPresenceParSessionParModule].[Nombre_Present] AS [Nombre_Present], 
+    [RapportPresenceParSessionParModule].[Nombre_Absence] AS [Nombre_Absence]
+    FROM [dbo].[RapportPresenceParSessionParModule] AS [RapportPresenceParSessionParModule]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VueListProjetConc" EntityType="Self.VueListProjetConc" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VueListProjetConc].[Projet] AS [Projet], 
+    [VueListProjetConc].[Incubes] AS [Incubes], 
+    [VueListProjetConc].[Secteur] AS [Secteur], 
+    [VueListProjetConc].[Description] AS [Description]
+    FROM [dbo].[VueListProjetConc] AS [VueListProjetConc]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VueModuleConc" EntityType="Self.VueModuleConc" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VueModuleConc].[id] AS [id], 
+    [VueModuleConc].[Module] AS [Module], 
+    [VueModuleConc].[Debut] AS [Debut], 
+    [VueModuleConc].[Fin] AS [Fin], 
+    [VueModuleConc].[Tot_Sessions] AS [Tot_Sessions], 
+    [VueModuleConc].[H_Debut] AS [H_Debut], 
+    [VueModuleConc].[H_Fin] AS [H_Fin], 
+    [VueModuleConc].[Formateur] AS [Formateur], 
+    [VueModuleConc].[Statut] AS [Statut]
+    FROM [dbo].[VueModuleConc] AS [VueModuleConc]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VueObservationsIncubes" EntityType="Self.VueObservationsIncubes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VueObservationsIncubes].[N_Incube] AS [N_Incube], 
+    [VueObservationsIncubes].[N_Module] AS [N_Module], 
+    [VueObservationsIncubes].[D_Scan] AS [D_Scan], 
+    [VueObservationsIncubes].[J_Session] AS [J_Session], 
+    [VueObservationsIncubes].[H_D_Module] AS [H_D_Module], 
+    [VueObservationsIncubes].[H_Arrivee] AS [H_Arrivee], 
+    [VueObservationsIncubes].[H_F_Module] AS [H_F_Module], 
+    [VueObservationsIncubes].[H_Sortie] AS [H_Sortie], 
+    [VueObservationsIncubes].[H_Formation] AS [H_Formation], 
+    [VueObservationsIncubes].[H_Participation] AS [H_Participation], 
+    [VueObservationsIncubes].[P_Participation] AS [P_Participation], 
+    [VueObservationsIncubes].[Observation] AS [Observation]
+    FROM [dbo].[VueObservationsIncubes] AS [VueObservationsIncubes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VuePresence" EntityType="Self.VuePresence" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VuePresence].[id] AS [id], 
+    [VuePresence].[Incubes] AS [Incubes], 
+    [VuePresence].[projet] AS [projet], 
+    [VuePresence].[Module] AS [Module], 
+    [VuePresence].[Participation] AS [Participation], 
+    [VuePresence].[Arrive] AS [Arrive], 
+    [VuePresence].[Sortie] AS [Sortie], 
+    [VuePresence].[Date] AS [Date], 
+    [VuePresence].[Justification] AS [Justification]
+    FROM [dbo].[VuePresence] AS [VuePresence]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CodeQR_Incube" Association="Self.FK_CodeQR_Incube">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="CodeQR" EntitySet="CodeQR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entreprise_Proprietaire" Association="Self.FK_Entreprise_Proprietaire">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="Entreprise" EntitySet="Entreprise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presence_Incube" Association="Self.FK_Presence_Incube">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="Presence" EntitySet="Presence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presence_Module" Association="Self.FK_Presence_Module">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Presence" EntitySet="Presence" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EclosionHubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CodeQR">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Incube" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Incube1" Relationship="Self.FK_CodeQR_Incube" FromRole="CodeQR" ToRole="Incubes" />
+        </EntityType>
+        <EntityType Name="Entreprisee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Proprietaire" Type="Int32" Nullable="false" />
+          <Property Name="Secteur_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Incube" Relationship="Self.FK_Entreprise_Proprietaire" FromRole="Entreprise" ToRole="Incubes" />
+        </EntityType>
+        <EntityType Name="Incube">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Postnom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Matricule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="CodeQRs" Relationship="Self.FK_CodeQR_Incube" FromRole="Incubes" ToRole="CodeQR" />
+          <NavigationProperty Name="Entreprises" Relationship="Self.FK_Entreprise_Proprietaire" FromRole="Incubes" ToRole="Entreprise" />
+          <NavigationProperty Name="Presences" Relationship="Self.FK_Presence_Incube" FromRole="Incubes" ToRole="Presence" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_debut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Heure_debut" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Heure_fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Formateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Statut" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Presences" Relationship="Self.FK_Presence_Module" FromRole="Modules" ToRole="Presence" />
+        </EntityType>
+        <EntityType Name="Presence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Incube" Type="Int32" Nullable="false" />
+          <Property Name="Module" Type="Int32" Nullable="false" />
+          <Property Name="Present" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="heure_arrive" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="heure_sortie" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Date_Scan" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Incube1" Relationship="Self.FK_Presence_Incube" FromRole="Presence" ToRole="Incubes" />
+          <NavigationProperty Name="Module1" Relationship="Self.FK_Presence_Module" FromRole="Presence" ToRole="Modules" />
+          <Property Name="Justification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Eligibilite">
+          <Key>
+            <PropertyRef Name="Nom_Incube" />
+            <PropertyRef Name="Projet" />
+            <PropertyRef Name="P_Participation_Total" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Incube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Projet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tot_Participation" Type="Int32" />
+          <Property Name="Nombre_Present" Type="Int32" />
+          <Property Name="Nombre_Absence" Type="Int32" />
+          <Property Name="P_Participation_Total" Type="String" MaxLength="43" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observation" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RapportDePresenceComplet">
+          <Key>
+            <PropertyRef Name="Incube" />
+            <PropertyRef Name="Entreprise" />
+            <PropertyRef Name="Module" />
+          </Key>
+          <Property Name="Incube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Entreprise" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tot_Sessions" Type="Int32" />
+          <Property Name="Presences" Type="Int32" />
+          <Property Name="Absences" Type="Int32" />
+          <Property Name="Pourcentage" Type="Decimal" Precision="26" Scale="12" />
+        </EntityType>
+        <EntityType Name="RapportParticipationTotalParModule">
+          <Key>
+            <PropertyRef Name="Nom_Module" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_Sessions" Type="Int32" />
+          <Property Name="Tot_Participation" Type="Int32" />
+          <Property Name="Nombre_Present" Type="Int32" />
+          <Property Name="Nombre_Absence" Type="Int32" />
+          <Property Name="P_Participation" Type="String" MaxLength="43" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observation" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RapportPresenceParModule">
+          <Key>
+            <PropertyRef Name="Nom_Incube" />
+            <PropertyRef Name="Entreprise" />
+            <PropertyRef Name="Nom_Module" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="Nom_Incube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Entreprise" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom_Module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_Sessions" Type="Int32" />
+          <Property Name="Presences" Type="Int32" />
+          <Property Name="Absences" Type="Int32" />
+          <Property Name="P_Participation" Type="String" MaxLength="43" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observation" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RapportPresenceParSessionParModule">
+          <Key>
+            <PropertyRef Name="Nom_Module" />
+          </Key>
+          <Property Name="Nom_Module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="J_Session" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Seance" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Present" Type="Int32" />
+          <Property Name="Nombre_Absence" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VueObservationsIncube">
+          <Key>
+            <PropertyRef Name="N_Incube" />
+            <PropertyRef Name="N_Module" />
+            <PropertyRef Name="H_Formation" />
+            <PropertyRef Name="H_Participation" />
+            <PropertyRef Name="P_Participation" />
+            <PropertyRef Name="Observation" />
+          </Key>
+          <Property Name="N_Incube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="N_Module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="D_Scan" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="J_Session" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="H_D_Module" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="H_Arrivee" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="H_F_Module" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="H_Sortie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="H_Formation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="H_Participation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_Participation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observation" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CodeQR_Incube">
+          <End Role="Incubes" Type="Self.Incube" Multiplicity="1" />
+          <End Role="CodeQR" Type="Self.CodeQR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CodeQR">
+              <PropertyRef Name="Incube" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entreprise_Proprietaire">
+          <End Role="Incubes" Type="Self.Incube" Multiplicity="1" />
+          <End Role="Entreprise" Type="EclosionHubModel.Entreprisee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entreprise">
+              <PropertyRef Name="Proprietaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presence_Incube">
+          <End Role="Incubes" Type="Self.Incube" Multiplicity="1" />
+          <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Incubes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Presence">
+              <PropertyRef Name="Incube" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presence_Module">
+          <End Role="Modules" Type="Self.Module" Multiplicity="1" />
+          <End Role="Presence" Type="Self.Presence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Presence">
+              <PropertyRef Name="Module" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EclosionHubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CodeQRs" EntityType="Self.CodeQR" />
+          <EntitySet Name="Entreprisees" EntityType="EclosionHubModel.Entreprisee" />
+          <EntitySet Name="Incubes" EntityType="Self.Incube" />
+          <EntitySet Name="Modules" EntityType="Self.Module" />
+          <EntitySet Name="Presences" EntityType="Self.Presence" />
+          <EntitySet Name="Eligibilites" EntityType="Self.Eligibilite" />
+          <EntitySet Name="RapportDePresenceComplets" EntityType="Self.RapportDePresenceComplet" />
+          <EntitySet Name="RapportParticipationTotalParModules" EntityType="Self.RapportParticipationTotalParModule" />
+          <EntitySet Name="RapportPresenceParModules" EntityType="Self.RapportPresenceParModule" />
+          <EntitySet Name="RapportPresenceParSessionParModules" EntityType="Self.RapportPresenceParSessionParModule" />
+          <EntitySet Name="VueObservationsIncubes" EntityType="Self.VueObservationsIncube" />
+          <AssociationSet Name="FK_CodeQR_Incube" Association="Self.FK_CodeQR_Incube">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="CodeQR" EntitySet="CodeQRs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entreprise_Proprietaire" Association="Self.FK_Entreprise_Proprietaire">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="Entreprise" EntitySet="Entreprisees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presence_Incube" Association="Self.FK_Presence_Incube">
+            <End Role="Incubes" EntitySet="Incubes" />
+            <End Role="Presence" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presence_Module" Association="Self.FK_Presence_Module">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Presence" EntitySet="Presences" />
+          </AssociationSet>
+          <EntitySet Name="VueListProjetConcs" EntityType="EclosionHubModel.VueListProjetConc" />
+          <EntitySet Name="VueModuleConcs" EntityType="EclosionHubModel.VueModuleConc" />
+          <EntitySet Name="VuePresences" EntityType="EclosionHubModel.VuePresence" />
+        </EntityContainer>
+        <EntityType Name="VueListProjetConc">
+          <Key>
+            <PropertyRef Name="Projet" />
+            <PropertyRef Name="Incubes" />
+            <PropertyRef Name="Secteur" />
+            <PropertyRef Name="Description" />
+          </Key>
+          <Property Name="Projet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Incubes" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="Secteur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VueModuleConc">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Module" />
+            <PropertyRef Name="Formateur" />
+            <PropertyRef Name="Statut" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Module" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Debut" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Fin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Tot_Sessions" Type="Int32" />
+          <Property Name="H_Debut" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="H_Fin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Formateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VuePresence">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="Incubes" />
+            <PropertyRef Name="projet" />
+            <PropertyRef Name="Participation" />
+            <PropertyRef Name="Module" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Incubes" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="projet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Participation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Arrive" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Sortie" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Justification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Module" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EclosionHubModelStoreContainer" CdmEntityContainer="EclosionHubEntities">
+          <EntitySetMapping Name="CodeQRs">
+            <EntityTypeMapping TypeName="EclosionHubModel.CodeQR">
+              <MappingFragment StoreEntitySet="CodeQR">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Incube" ColumnName="Incube" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entreprisees">
+            <EntityTypeMapping TypeName="EclosionHubModel.Entreprisee">
+              <MappingFragment StoreEntitySet="Entreprise">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Proprietaire" ColumnName="Proprietaire" />
+                <ScalarProperty Name="Secteur_" ColumnName="Secteur " />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incubes">
+            <EntityTypeMapping TypeName="EclosionHubModel.Incube">
+              <MappingFragment StoreEntitySet="Incubes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Postnom" ColumnName="Postnom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="EclosionHubModel.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Date_debut" ColumnName="Date_debut" />
+                <ScalarProperty Name="Date_fin" ColumnName="Date_fin" />
+                <ScalarProperty Name="Heure_debut" ColumnName="Heure_debut" />
+                <ScalarProperty Name="Heure_fin" ColumnName="Heure_fin" />
+                <ScalarProperty Name="Formateur" ColumnName="Formateur" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presences">
+            <EntityTypeMapping TypeName="EclosionHubModel.Presence">
+              <MappingFragment StoreEntitySet="Presence">
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Incube" ColumnName="Incube" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="Present" ColumnName="Present" />
+                <ScalarProperty Name="heure_arrive" ColumnName="heure_arrive" />
+                <ScalarProperty Name="heure_sortie" ColumnName="heure_sortie" />
+                <ScalarProperty Name="Date_Scan" ColumnName="Date_Scan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eligibilites">
+            <EntityTypeMapping TypeName="EclosionHubModel.Eligibilite">
+              <MappingFragment StoreEntitySet="Eligibilite">
+                <ScalarProperty Name="Nom_Incube" ColumnName="Nom_Incube" />
+                <ScalarProperty Name="Projet" ColumnName="Projet" />
+                <ScalarProperty Name="Tot_Participation" ColumnName="Tot_Participation" />
+                <ScalarProperty Name="Nombre_Present" ColumnName="Nombre_Present" />
+                <ScalarProperty Name="Nombre_Absence" ColumnName="Nombre_Absence" />
+                <ScalarProperty Name="P_Participation_Total" ColumnName="P_Participation_Total" />
+                <ScalarProperty Name="Observation" ColumnName="Observation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RapportDePresenceComplets">
+            <EntityTypeMapping TypeName="EclosionHubModel.RapportDePresenceComplet">
+              <MappingFragment StoreEntitySet="RapportDePresenceComplet">
+                <ScalarProperty Name="Incube" ColumnName="Incube" />
+                <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="Tot_Sessions" ColumnName="Tot_Sessions" />
+                <ScalarProperty Name="Presences" ColumnName="Presences" />
+                <ScalarProperty Name="Absences" ColumnName="Absences" />
+                <ScalarProperty Name="Pourcentage" ColumnName="Pourcentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RapportParticipationTotalParModules">
+            <EntityTypeMapping TypeName="EclosionHubModel.RapportParticipationTotalParModule">
+              <MappingFragment StoreEntitySet="RapportParticipationTotalParModule">
+                <ScalarProperty Name="Nom_Module" ColumnName="Nom_Module" />
+                <ScalarProperty Name="N_Sessions" ColumnName="N_Sessions" />
+                <ScalarProperty Name="Tot_Participation" ColumnName="Tot_Participation" />
+                <ScalarProperty Name="Nombre_Present" ColumnName="Nombre_Present" />
+                <ScalarProperty Name="Nombre_Absence" ColumnName="Nombre_Absence" />
+                <ScalarProperty Name="P_Participation" ColumnName="P_Participation" />
+                <ScalarProperty Name="Observation" ColumnName="Observation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RapportPresenceParModules">
+            <EntityTypeMapping TypeName="EclosionHubModel.RapportPresenceParModule">
+              <MappingFragment StoreEntitySet="RapportPresenceParModule">
+                <ScalarProperty Name="Nom_Incube" ColumnName="Nom_Incube" />
+                <ScalarProperty Name="Entreprise" ColumnName="Entreprise" />
+                <ScalarProperty Name="Nom_Module" ColumnName="Nom_Module" />
+                <ScalarProperty Name="N_Sessions" ColumnName="N_Sessions" />
+                <ScalarProperty Name="Presences" ColumnName="Presences" />
+                <ScalarProperty Name="Absences" ColumnName="Absences" />
+                <ScalarProperty Name="P_Participation" ColumnName="P_Participation" />
+                <ScalarProperty Name="Observation" ColumnName="Observation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RapportPresenceParSessionParModules">
+            <EntityTypeMapping TypeName="EclosionHubModel.RapportPresenceParSessionParModule">
+              <MappingFragment StoreEntitySet="RapportPresenceParSessionParModule">
+                <ScalarProperty Name="Nom_Module" ColumnName="Nom_Module" />
+                <ScalarProperty Name="J_Session" ColumnName="J_Session" />
+                <ScalarProperty Name="Date_Seance" ColumnName="Date_Seance" />
+                <ScalarProperty Name="Nombre_Present" ColumnName="Nombre_Present" />
+                <ScalarProperty Name="Nombre_Absence" ColumnName="Nombre_Absence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VueObservationsIncubes">
+            <EntityTypeMapping TypeName="EclosionHubModel.VueObservationsIncube">
+              <MappingFragment StoreEntitySet="VueObservationsIncubes">
+                <ScalarProperty Name="N_Incube" ColumnName="N_Incube" />
+                <ScalarProperty Name="N_Module" ColumnName="N_Module" />
+                <ScalarProperty Name="D_Scan" ColumnName="D_Scan" />
+                <ScalarProperty Name="J_Session" ColumnName="J_Session" />
+                <ScalarProperty Name="H_D_Module" ColumnName="H_D_Module" />
+                <ScalarProperty Name="H_Arrivee" ColumnName="H_Arrivee" />
+                <ScalarProperty Name="H_F_Module" ColumnName="H_F_Module" />
+                <ScalarProperty Name="H_Sortie" ColumnName="H_Sortie" />
+                <ScalarProperty Name="H_Formation" ColumnName="H_Formation" />
+                <ScalarProperty Name="H_Participation" ColumnName="H_Participation" />
+                <ScalarProperty Name="P_Participation" ColumnName="P_Participation" />
+                <ScalarProperty Name="Observation" ColumnName="Observation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VueListProjetConcs">
+            <EntityTypeMapping TypeName="EclosionHubModel.VueListProjetConc">
+              <MappingFragment StoreEntitySet="VueListProjetConc">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Secteur" ColumnName="Secteur" />
+                <ScalarProperty Name="Incubes" ColumnName="Incubes" />
+                <ScalarProperty Name="Projet" ColumnName="Projet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VueModuleConcs">
+            <EntityTypeMapping TypeName="EclosionHubModel.VueModuleConc">
+              <MappingFragment StoreEntitySet="VueModuleConc">
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="Formateur" ColumnName="Formateur" />
+                <ScalarProperty Name="H_Fin" ColumnName="H_Fin" />
+                <ScalarProperty Name="H_Debut" ColumnName="H_Debut" />
+                <ScalarProperty Name="Tot_Sessions" ColumnName="Tot_Sessions" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Debut" ColumnName="Debut" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VuePresences">
+            <EntityTypeMapping TypeName="EclosionHubModel.VuePresence">
+              <MappingFragment StoreEntitySet="VuePresence">
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Sortie" ColumnName="Sortie" />
+                <ScalarProperty Name="Arrive" ColumnName="Arrive" />
+                <ScalarProperty Name="Participation" ColumnName="Participation" />
+                <ScalarProperty Name="projet" ColumnName="projet" />
+                <ScalarProperty Name="Incubes" ColumnName="Incubes" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
